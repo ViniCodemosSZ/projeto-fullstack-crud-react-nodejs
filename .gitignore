@@ -1,0 +1,17 @@
+# Dependências 
+node_modules/
+dist/
+build/
+
+# Configurações de Editores e Ferramentas
+.vscode/
+.qodo/
+.idea/
+*.log
+.DS_Store
+
+# Variáveis de Ambiente
+.env
+.env.local
+
+Web/README.md

@@ -1,0 +1,21 @@
+.main-rodape {
+    width: 100%;
+    padding: 20px 0;
+    background-color: #f8fafc; 
+    border-top: 1px solid #e2e8f0;
+    margin-top: auto; 
+    color: #64748b;
+    font-family: 'Poppins', sans-serif; 
+    text-align: center;
+}
+
+.main-rodape p {
+    margin: 0;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+}
+
+.main-rodape strong {
+    color: #2c3e50; 
+    font-weight: 600;
+}

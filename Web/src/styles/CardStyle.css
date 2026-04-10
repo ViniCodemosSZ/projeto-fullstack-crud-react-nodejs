@@ -1,0 +1,38 @@
+.containerCard {
+    background-color: #a7c7e7;
+    width: 100%;            
+    padding: 16px 24px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    cursor: pointer;
+    color: #000000;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+}
+
+.icon-arrow {
+    color: #2c3e50; 
+    opacity: 0.5;
+    transition: transform 0.2s ease;
+}
+
+.containerCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    background-color: #94b8db; 
+}
+
+.containerCard:hover .icon-arrow {
+    opacity: 1;
+    transform: translateX(5px);
+}
+
+.containerCard:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 8px 10px black;
+
+}
