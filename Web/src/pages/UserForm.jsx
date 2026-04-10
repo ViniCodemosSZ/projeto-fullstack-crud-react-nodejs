@@ -12,12 +12,10 @@ const UserForm = () => {
     const navigate = useNavigate();
     const { id } = useParams();
 
-    // Carrega os dados pra listar na pagina de edição
     useEffect(() => {
         if (id) {
             axios.get("http://localhost:3001/usuarios")
                 .then(({ data }) => {
-                    // Procura o usuário pelo ID na lista
                     const found = data.find(u => u.id === parseInt(id));
                     if (found) setUser(found);
                 })
@@ -31,17 +29,25 @@ const UserForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         try {
             if (id) {
-                await axios.put(`http://localhost:3001/usuarios/${id}`, user);
-                toast.success("Atualizado com sucesso!");
+                // Função de Edição 
+                const res = await axios.put(`http://localhost:3001/usuarios/${id}`, user);
+                toast.success(res.data); 
             } else {
-                await axios.post("http://localhost:3001/usuarios", user);
-                toast.success("Cadastrado com sucesso!");
+                // Função de Cadastro 
+                const res = await axios.post("http://localhost:3001/usuarios", user);
+                toast.success(res.data);
             }
             navigate("/");
-        } catch (err) {
-            toast.error("Erro ao salvar dados!");
+        } catch (error) {
+            if (error.response && error.response.data) {
+                const msg = error.response.data.message || error.response.data;
+                toast.error(msg); 
+            } else {
+                toast.error("Erro ao conectar com o servidor.");
+            }
         }
     };
 
@@ -59,21 +65,21 @@ const UserForm = () => {
                 </div>
                 <div className="input-group">
                     <label>Telefone</label>
-                    <input name="telefone" value={user.telefone} onChange={handleChange} maxLength="11" placeholder="(00) 00000-0000" />
+                    <input name="telefone" value={user.telefone} onChange={handleChange} maxLength="13" placeholder="(00) 00000-0000" />
                 </div>
                 <div className="row">
                     <div className="input-group">
                         <label>CPF</label>
-                        <input name="cpf" value={user.cpf} onChange={handleChange} maxLength="11" placeholder="000.000.000-00" required />
+                        <input name="cpf" value={user.cpf} onChange={handleChange} maxLength="14" placeholder="000.000.000-00" required />
                     </div>
                     <div className="input-group">
                         <label>RG</label>
-                        <input name="rg" value={user.rg} onChange={handleChange} maxLength="9" placeholder="00.000.000-0"/>
+                        <input name="rg" value={user.rg} onChange={handleChange} maxLength="12" placeholder="00.000.000-0"/>
                     </div>
                 </div>
                 <div className="input-group">
                     <label>Idade</label>
-                    <input name="idade" type="number" value={user.idade} onChange={handleChange} />
+                    <input name="idade" type="number" value={user.idade} onChange={handleChange} min="0" max="120"/>
                 </div>
                 
                 <div className="button-group">
